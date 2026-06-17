@@ -437,6 +437,8 @@ void VERIFICAR_TECLA(uint8_t teclado_column)
 	// OJO: Luego de atender al boton, volver a setear Teclado_Accionado en 16 para evitar doble lectura
 
 	switch(teclado_column){
+
+		// si teclado_column = 0, no hace nada
 		case 0: return;
 
 		//CHECKEO SOLO COLUMNA A
