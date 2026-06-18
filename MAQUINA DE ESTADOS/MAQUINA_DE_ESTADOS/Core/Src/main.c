@@ -22,6 +22,11 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+
+// INCLUYO libreria para números aleatorios
+#include <stdlib.h>
+
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -43,28 +48,59 @@
 
 /* USER CODE BEGIN PV */
 
+
+// MEMORIA debe ser una matriz de 9x5
+// donde en los bordes tengo ceros, esto es para simplificar la logica de END_GAME
+
+//		C0	C1	C2	C3	C4	C5
+//	F1	0	x	x	x	x	0
+//	F2	0	x	x	x	x	0
+//	F3	0	x	x	x	x	0
+//	F4	0	x	x	x	x	0
+//	F5	0	x	x	x	x	0
+//	F6	0	x	x	x	x	0
+//	F7	0	x	x	x	x	0
+//	F8	0	x	x	x	x	0
+//	F9	0	0	0	0	0	0
+
 //	ESTADO elije en que estado de la maquina esta
 //	0	menu
 //	1	P1 y P2
 //	2	TRANSICION
 //	3	CPU
 //	4	END GAME
+//  5	TRANSICION_END_GAME
 uint8_t ESTADO = 0;
 
-//	QUIEN JUEGA
+// Si hay ganador
+//GANA = 0 NO FIN
+//GANA = 1 P1
+//GANA = 2 P2 O CPU
+//GANA = 3 EMPATE
+uint8_t GANA = 0;
+
+// Para MEMORIA y LEDs
+uint8_t FILA = 1;
+uint8_t COLUMNA;
+
+//	QUIEN JUEGA, solo define el color de la ficha
 //	0	P1
 //	1	P2
-//	2	CPU
-uint8_t JUEGA = 0;
+bool TURNO_JUGADOR = 0;
+// CPU no tiene un turno, es un cambio a otro estado
 
 
-// si CPU = 0 juega P2, si CPU = 1, juega P2
+// si CPU = 0 juega P2; si CPU = 1, juega CPU
 bool CPU = 0;
+
 // CPU_DIFF elijo dificultad de CPU
 //	1	random
 //	2	facil
 //	3	dificil???
 uint8_t CPU_DIFF = 1;
+
+// SE crea un numero aleatorio para DIFF 1 de CPU
+uint8_t ALEATORIO
 
 
 // Por ahora color es un integer, luego vemos
@@ -90,6 +126,8 @@ void TRANSICION(void);
 void INICIO_JUEGO(void);
 void CPU(void);
 void END_GAME(void);
+void JUGADA_ACEPTADA(void);
+void TRANSICION_END_GAME(void);
 
 /* USER CODE END PFP */
 
@@ -147,6 +185,7 @@ int main(void)
 		  case 2: TRANSICION();
 		  case 3: CPU();
 		  case 4: END_GAME();
+		  case 5: TRANSICION_END_GAME();
 	  }
 
 
@@ -447,6 +486,7 @@ void MENU(void)
 
 void PLAYER(void)
 {
+	FILA = 1;
 	VERIFICAR_TECLA(teclado_column);
 
 
@@ -519,7 +559,23 @@ void PLAYER(void)
 // aca por ahi si, se introduce una variable matriz de la posicion de las jugadas
 void TRANSICION(void)
 {
+//	color(TURNO_JUGADOR);
+	if ( MEMORIA(FILA,COLUMNA) != 0 )
+	{
+		//JUGADA INVALIDA
 
+		//buzzer
+		ESTADO = 1;
+		return;
+	}
+	}
+	else
+	{
+		//JUGADA VALIDADA
+
+		//buzzer
+		JUGADA_ACEPTADA();
+	}
 
 
 }
@@ -529,6 +585,110 @@ void INICIO_JUEGO(void)
 	// aca hago algo con los LED para que pase un tiempito
 	// es inicio de juego
 }
+
+void JUGADA_ACEPTADA(void)
+{
+    while (1)
+    {
+        ENCIENDE_LED(FILA, COLUMNA);
+
+        FILA++;
+
+        if ( (MEMORIA(FILA, COLUMNA) != 0) || (FILA > 8) )
+        {
+        	FILA = 1;
+            ESTADO = 4;
+            return;
+        }
+
+        FILA--;
+        APAGA_LED(FILA, COLUMNA);
+        FILA++;
+    }
+}
+
+
+void END_GAME(void)
+{
+	for (FILA = 0; FILA < 8; FILA++)
+	{
+		for (COLUMNA = 0; COLUMNA < 4; COLUMNA++)
+		{
+			if (MEMORIA(FILA,COLUMNA) != 0)
+			{
+				if (
+						((MEMORIA(FILA+1,COLUMNA)   == MEMORIA(FILA,COLUMNA)) && (MEMORIA(FILA+1,COLUMNA)   == MEMORIA(FILA,COLUMNA))) || // Vertical
+						((MEMORIA(FILA-1,COLUMNA-1) == MEMORIA(FILA,COLUMNA)) && (MEMORIA(FILA+1,COLUMNA+1) == MEMORIA(FILA,COLUMNA))) || 		// Diagonal
+						((MEMORIA(FILA,COLUMNA-1)   == MEMORIA(FILA,COLUMNA)) && (MEMORIA(FILA,COLUMNA+1)   == MEMORIA(FILA,COLUMNA))) || // Horizontal
+						((MEMORIA(FILA+1,COLUMNA-1) == MEMORIA(FILA,COLUMNA)) && (MEMORIA(FILA-1,COLUMNA+1) == MEMORIA(FILA,COLUMNA)))    // Diagonal /
+				)
+				{
+					//buzzer
+					GANA = MEMORIA(FILA,COLUMNA);
+					ESTADO = 5;
+				}
+			}
+		}
+	}
+
+	if ( (MEMORIA(0,0) != 0) && (MEMORIA(0,1) != 0) && (MEMORIA(0,2) != 0) && (MEMORIA(0,3) != 0) )
+	{
+		//buzzer
+		GANA = 3;
+		ESTADO = 5;
+	}
+
+
+
+	//Si CPU = 0 entonces cambia de turno entre P1 y P2
+	//Si CPU = 1 entonces mantiene el turno pero salta a estado de juego de CPU
+	if (CPU == 0) TURNO_JUGADOR = !TURNO_JUGADOR;
+	else ESTADO = 3;
+
+
+}
+
+
+void TRANSICION_END_GAME(void)
+{
+
+	while (Teclado_Accionado == 16)
+	VERIFICAR_TECLA(teclado_column)
+	if (GANA == 1)
+	{
+
+	}
+	else if (GANA == 2)
+	{
+
+	}
+	else  // (GANA == 3)
+	{
+
+	}
+
+}
+
+void CPU(void)
+{
+	// TODAVIA DIFF 1 NO ESTA HABILITADA, ERROR AL VOLVER POR PLAYER 1
+	if (CPU_DIFF == 1)
+	{
+		srand(HAL_GetTick());
+		ALEATORIO = (rand() % 4) + 1;
+
+		COLUMNA = ALEATORIO;
+	}
+
+	else if (CPU_DIFF == 2)
+	{
+
+	}
+
+}
+
+
+
 /* USER CODE END 4 */
 
 /**
