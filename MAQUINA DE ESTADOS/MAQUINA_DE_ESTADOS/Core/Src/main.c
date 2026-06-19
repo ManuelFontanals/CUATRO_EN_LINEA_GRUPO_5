@@ -69,7 +69,7 @@
 //	2	TRANSICION
 //	3	CPU
 //	4	END GAME
-//  5	TRANSICION_END_GAME
+//	5	TRANSICION_END_GAME
 uint8_t ESTADO = 0;
 
 // Si hay ganador
@@ -120,7 +120,7 @@ uint8_t teclado_column = 0;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
-void GAME(void);
+void MENU(void);
 void PLAYER(void);
 void TRANSICION(void);
 void INICIO_JUEGO(void);
@@ -544,7 +544,7 @@ void PLAYER(void)
 		case 12:
 		{
 			//buzzer
-			ESTADO = 4;
+			ESTADO = 5;
 			break;
 		}
 	} // FIN SWITCH
@@ -567,7 +567,6 @@ void TRANSICION(void)
 		//buzzer
 		ESTADO = 1;
 		return;
-	}
 	}
 	else
 	{
@@ -610,6 +609,7 @@ void JUGADA_ACEPTADA(void)
 
 void END_GAME(void)
 {
+	//SI ALGUIEN GANA
 	for (FILA = 0; FILA < 8; FILA++)
 	{
 		for (COLUMNA = 0; COLUMNA < 4; COLUMNA++)
@@ -631,6 +631,7 @@ void END_GAME(void)
 		}
 	}
 
+	// SI HAY EMPATE
 	if ( (MEMORIA(0,0) != 0) && (MEMORIA(0,1) != 0) && (MEMORIA(0,2) != 0) && (MEMORIA(0,3) != 0) )
 	{
 		//buzzer
@@ -639,10 +640,14 @@ void END_GAME(void)
 	}
 
 
-
+	//SI NO ES FIN DE JUEGO
 	//Si CPU = 0 entonces cambia de turno entre P1 y P2
 	//Si CPU = 1 entonces mantiene el turno pero salta a estado de juego de CPU
-	if (CPU == 0) TURNO_JUGADOR = !TURNO_JUGADOR;
+	if (CPU == 0)
+	{
+		TURNO_JUGADOR = !TURNO_JUGADOR;
+		ESTADO = 1;
+	}
 	else ESTADO = 3;
 
 
@@ -651,26 +656,38 @@ void END_GAME(void)
 
 void TRANSICION_END_GAME(void)
 {
+	Teclado_Accionado = 16;
 
 	while (Teclado_Accionado == 16)
-	VERIFICAR_TECLA(teclado_column)
-	if (GANA == 1)
 	{
-
+		VERIFICAR_TECLA(teclado_column)
+					if (GANA == 1)
+					{
+						//ANIMACION P1
+					}
+					else if (GANA == 2)
+					{
+						//ANIMACION P2 O CPU
+					}
+					else if (GANA == 3)
+					{
+						//ANIMACION EMPATE
+					}
+					else  //(GANA == 0) RESET
+					{
+						//ANIMACION RESET
+					}
 	}
-	else if (GANA == 2)
-	{
+	ESTADO = 0;
+	INICIO_JUEGO();
 
-	}
-	else  // (GANA == 3)
-	{
-
-	}
 
 }
 
 void CPU(void)
 {
+	TURNO_JUGADOR = !TURNO_JUGADOR;
+
 	// TODAVIA DIFF 1 NO ESTA HABILITADA, ERROR AL VOLVER POR PLAYER 1
 	if (CPU_DIFF == 1)
 	{
@@ -684,6 +701,10 @@ void CPU(void)
 	{
 
 	}
+
+	TURNO_JUGADOR = !TURNO_JUGADOR;
+	//ESTO DEPENDE DE COMO HAGA DIFF 1
+	ESTADO = 1;
 
 }
 
