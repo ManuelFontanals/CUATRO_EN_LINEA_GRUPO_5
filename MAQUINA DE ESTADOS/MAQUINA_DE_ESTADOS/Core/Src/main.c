@@ -100,7 +100,7 @@ bool CPU = 0;
 uint8_t CPU_DIFF = 1;
 
 // SE crea un numero aleatorio para DIFF 1 de CPU
-uint8_t ALEATORIO
+uint8_t ALEATORIO;
 
 
 // Por ahora color es un integer, luego vemos
@@ -178,16 +178,32 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  switch ESTADO
+	  switch (ESTADO)
 	  {
-		  case 0: MENU();
-		  case 1: PLAYER();
-		  case 2: TRANSICION();
-		  case 3: CPU();
-		  case 4: END_GAME();
-		  case 5: TRANSICION_END_GAME();
-	  }
+	      case 0:
+	          MENU();
+	          break;
 
+	      case 1:
+	          PLAYER();
+	          break;
+
+	      case 2:
+	          TRANSICION();
+	          break;
+
+	      case 3:
+	          CPU();
+	          break;
+
+	      case 4:
+	          END_GAME();
+	          break;
+
+	      case 5:
+	          TRANSICION_END_GAME();
+	          break;
+	  }
 
   }
   /* USER CODE END 3 */
@@ -404,44 +420,44 @@ void MENU(void)
 		{
 			//buzzer
 			Teclado_Accionado = 16;
-			break;
-		}
+
+		}break;
 
 	// Elije si CPU activo o no
 	case 4:
 		{
 			//buzzer
 			CPU = !CPU;
-			break;
-		}
+
+		}break;
 
 	// Elije diff de CPU
 	case 5:
 		{
 			//buzzer
 			CPU_DIFF = 1;
-			break;
-		}
+
+		}break;
 	case 6:
 		{
 			//buzzer
 			CPU_DIFF = 2;
-			break;
-		}
+
+		}break;
 	case 7:
 		{
 			//buzzer
 			CPU_DIFF = 3;
-			break;
-		}
+
+		}break;
 
 	// CAMBIA DE ESTADO A P1
 	case 8:
 		{
 			//buzzer
 			ESTADO = 1;
-			break;
-		}
+
+		}break;
 
 	// Cambia color P1 y P2, ponele q son 3, subida
 	case 10:
@@ -449,31 +465,31 @@ void MENU(void)
 			//buzzer
 			if (COLOR_P1 < 3) COLOR_P1++;
 			else COLOR_P1 = 0;
-			break;
-		}
+
+		}break;
 	case 14:
 		{
 			//buzzer
 			if (COLOR_P2 < 3) COLOR_P2++;
 			else COLOR_P2 = 0;
-			break;
-		}
+
+		}break;
 	// Cambia color P1 y P2, bajada
 	case 9:
 		{
 			//buzzer
 			if (COLOR_P1 > 0) COLOR_P1--;
 			else COLOR_P1 = 2;
-			break;
-		}
+
+		}break;
 
 	case 13:
 		{
 			//buzzer
 			if (COLOR_P2 > 0) COLOR_P2--;
 			else COLOR_P2 = 2;
-			break;
-		}
+
+		}break;
 
 	} //END SWITCH
 
@@ -500,53 +516,53 @@ void PLAYER(void)
 		{
 			//buzzer
 			Teclado_Accionado = 16;
-			break;
-		}
+
+		}break;
 		// Selecciona COLUMNA 1
 		case 0:
 		{
 			//buzzer
 			COLUMNA = 1;
-			break;
-		}
+
+		}break;
 		// Selecciona COLUMNA 2
 		case 1:
 		{
 			//buzzer
 			COLUMNA = 2;
-			break;
-		}
+
+		}break;
 		// Selecciona COLUMNA 3
 		case 2:
 		{
 			//buzzer
 			COLUMNA = 3;
-			break;
-		}
+
+		}break;
 		// Selecciona COLUMNA 4
 		case 3:
 		{
 			//buzzer
 			COLUMNA = 4;
-			break;
-		}
+
+		}break;
 
 		// Confirmar Jugada
 		case 8:
 		{
 			//buzzer
 			ESTADO = 2;
-			break;
 
-		}
+
+		}break;
 
 		// RESET
 		case 12:
 		{
 			//buzzer
 			ESTADO = 5;
-			break;
-		}
+
+		}break;
 	} // FIN SWITCH
 
 	teclado_column = 0;
