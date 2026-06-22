@@ -1,0 +1,4 @@
+../Core/Src/TECLADO.c:42:6:INICIO_TECLADO	8	static
+../Core/Src/TECLADO.c:51:6:VerificarBoton	32	static
+../Core/Src/TECLADO.c:87:6:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/TECLADO.c:105:6:TecladoPresiona	8	static

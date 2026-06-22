@@ -1,6 +1,6 @@
 function PLAYING()
-    global ESTADO
-
+global ESTADO
+while ESTADO <> 5
         select ESTADO
             case 0 then
                 MENU();
@@ -15,5 +15,5 @@ function PLAYING()
             case 5 then
                 TRANSICION_END_GAME();
         end
-
+end
 endfunction

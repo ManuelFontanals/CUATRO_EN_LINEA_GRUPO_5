@@ -1,0 +1,4 @@
+../Core/Src/TECLADO.c:42:6:INICIO_TECLADO	1
+../Core/Src/TECLADO.c:51:6:VerificarBoton	6
+../Core/Src/TECLADO.c:87:6:HAL_TIM_PeriodElapsedCallback	5
+../Core/Src/TECLADO.c:105:6:TecladoPresiona	22

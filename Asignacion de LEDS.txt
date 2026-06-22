@@ -1,0 +1,96 @@
+
+// MEPA Q ESTO ES PARA ASIGNAR COLOR
+
+//uint32_t VECTOR_COLOR_0[8] = {D32,D31,D30,D29,D16,D15,D14,D13}
+//uint32_t VECTOR_COLOR_1[8] = {D28,D27,D26,D25,D12,D11,D10,D9}
+//uint32_t VECTOR_COLOR_2[8] = {D24,D23,D22,D21,D8,D7,D6,D5}
+//uint32_t VECTOR_COLOR_3[8] = {D20,D19,D18,D17,D4,D3,D2,D1}
+
+
+//En jugada aceptada tengo el recorrido en caida, entonces ASIGNACION_LEDS
+// solo debe tomar el dato de: 
+//	- la columna para elegir entre los vectores
+//	- la fila para saber cual encender y cual apagar en la secuencia
+//	- el color para "saber" de que player es (en realidad solo importa el
+// 	  color, no a que player pertenece)
+
+void JUGADA_ACEPTADA(void)
+{
+	uint8_t c = COLUMNA;
+
+	M[0][c] = COLOR;
+	// ENCIENDO PRIMER LED
+	//SI COLUMNA 3 ENTONCES ENCIENDO D20
+
+	for (uint8_t f = 1; f < 8; f++)
+	{
+		if (M[f][c] != 0)
+		{
+			ESTADO = 4;
+			return;
+		}
+
+//	ESTA FUNCION DEBE ENCENDER LA FILA ACTUAL Y APAGAR LA ANTERIOR
+//		ASIGNACION_LEDS(c,f,COLOR)
+
+		M[f][c] = COLOR;
+
+
+		M[f - 1][c] = 0;
+
+	}
+
+//		disp(M);
+
+	ESTADO = 4;
+}
+
+// ENTONCES mepa que esta es la estructura
+void ASIGNACION_LEDS(uint8_t columna, uint8_t fila, uint8_t COLOR)
+{
+	uint32_t HEX_COLOR = 0x000000;
+
+	//ROJO
+	if (COLOR == 1) HEX_COLOR = 0x1F0000;
+	//AZUL
+	if (COLOR == 2) HEX_COLOR = 0x00001F;
+
+	if (columna == 0)
+	{
+//	encender fila actual
+//	esto es enciendo D_X del vector asociado a VECTOR COLOR 0
+
+//		VECTOR_COLOR_0[fila] = HEX_COLOR;
+//	y apago D_X anterior
+//		VECTOR_COLOR_0[fila - 1] = 0x000000;
+	}
+	else if (columna == 1)
+	{
+//	encender fila actual
+//	esto es enciendo D_X del vector asociado a VECTOR COLOR 1
+
+//		VECTOR_COLOR_1[fila] = HEX_COLOR;
+//	y apago D_X anterior
+//		VECTOR_COLOR_1[fila - 1] = 0x000000;
+	}
+	else if (columna == 2)
+	{
+//	encender fila actual
+//	esto es enciendo D_X del vector asociado a VECTOR COLOR 2
+
+//		VECTOR_COLOR_2[fila] = HEX_COLOR;
+//	y apago D_X anterior
+//		VECTOR_COLOR_2[fila - 1] = 0x000000;
+	}
+	else if (columna == 3)
+	{
+//	encender fila actual
+//	esto es enciendo D_X del vector asociado a VECTOR COLOR 3
+
+//		VECTOR_COLOR_3[fila] = HEX_COLOR;
+//	y apago D_X anterior
+//		VECTOR_COLOR_3[fila - 1] = 0x000000;
+	}
+}
+
+
