@@ -55,7 +55,10 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+<<<<<<< HEAD
 extern DMA_HandleTypeDef hdma_tim4_ch1;
+=======
+>>>>>>> origin/main
 extern TIM_HandleTypeDef htim14;
 /* USER CODE BEGIN EV */
 
@@ -200,6 +203,7 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+<<<<<<< HEAD
   * @brief This function handles DMA1 stream0 global interrupt.
   */
 void DMA1_Stream0_IRQHandler(void)
@@ -214,6 +218,8 @@ void DMA1_Stream0_IRQHandler(void)
 }
 
 /**
+=======
+>>>>>>> origin/main
   * @brief This function handles TIM8 trigger and commutation interrupts and TIM14 global interrupt.
   */
 void TIM8_TRG_COM_TIM14_IRQHandler(void)

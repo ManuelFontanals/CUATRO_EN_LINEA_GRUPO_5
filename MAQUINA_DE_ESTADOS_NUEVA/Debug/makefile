@@ -60,8 +60,13 @@ all: main-build
 main-build: MAQUINA_DE_ESTADOS_NUEVA.elf secondary-outputs
 
 # Tool invocations
+<<<<<<< HEAD
 MAQUINA_DE_ESTADOS_NUEVA.elf MAQUINA_DE_ESTADOS_NUEVA.map: $(OBJS) $(USER_OBJS) C:\Users\adria\Downloads\CUATRO_EN_LINEA_GRUPO_5-main\MAQUINA_DE_ESTADOS_NUEVA\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-gcc -o "MAQUINA_DE_ESTADOS_NUEVA.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\adria\Downloads\CUATRO_EN_LINEA_GRUPO_5-main\MAQUINA_DE_ESTADOS_NUEVA\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MAQUINA_DE_ESTADOS_NUEVA.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+=======
+MAQUINA_DE_ESTADOS_NUEVA.elf MAQUINA_DE_ESTADOS_NUEVA.map: $(OBJS) $(USER_OBJS) C:\Users\Manu\Desktop\MAQUINA_DE_ESTADOS_NUEVA\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "MAQUINA_DE_ESTADOS_NUEVA.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Manu\Desktop\MAQUINA_DE_ESTADOS_NUEVA\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MAQUINA_DE_ESTADOS_NUEVA.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+>>>>>>> origin/main
 	@echo 'Finished building target: $@'
 	@echo ' '
 

@@ -29,8 +29,11 @@
 #include <stdbool.h>
 // INCLUYE DEL TECLADO.h
 #include "TECLADO.h"
+<<<<<<< HEAD
 #include "LEDS.h"
 #include "Buzzer.h"
+=======
+>>>>>>> origin/main
 
 // LIB MEMORIA
 #include <string.h>
@@ -54,10 +57,14 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+<<<<<<< HEAD
 TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim4;
 TIM_HandleTypeDef htim14;
 DMA_HandleTypeDef hdma_tim4_ch1;
+=======
+TIM_HandleTypeDef htim14;
+>>>>>>> origin/main
 
 /* USER CODE BEGIN PV */
 
@@ -110,7 +117,11 @@ bool CPU = 0;
 // CPU_DIFF elijo dificultad de CPU
 //	1	random
 //	2	facil
+<<<<<<< HEAD
 //	3	dificil (no se llego a implementar)
+=======
+//	3	dificil???
+>>>>>>> origin/main
 uint8_t CPU_DIFF = 1;
 
 
@@ -120,9 +131,14 @@ uint8_t COLOR_P2 = 2;
 
 uint8_t COLOR = 1;
 
+<<<<<<< HEAD
 uint32_t L[32] = {0};															//Vector L de 32 elementos
 uint32_t vectorled[818] = {0};													//Vector de 818 elementos
 uint8_t actualizarpantalla = 0;													//Flag de control de pantalla
+=======
+
+
+>>>>>>> origin/main
 // MEPA Q ESTO ES PARA ASIGNAR COLOR
 //uint32_t VECTOR_COLOR_3[8] = {D20,D19,D18,D17,D4,D3,D2,D1}
 
@@ -135,10 +151,14 @@ uint8_t actualizarpantalla = 0;													//Flag de control de pantalla
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+<<<<<<< HEAD
 static void MX_DMA_Init(void);
 static void MX_TIM14_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM4_Init(void);
+=======
+static void MX_TIM14_Init(void);
+>>>>>>> origin/main
 /* USER CODE BEGIN PFP */
 void MENU(void);
 void PLAYER(void);
@@ -187,6 +207,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+<<<<<<< HEAD
   MX_DMA_Init();
   MX_TIM14_Init();
   MX_TIM3_Init();
@@ -196,6 +217,14 @@ int main(void)
   INICIO_TECLADO();															//
   INICIO_JUEGO();															//
   buzzvictoria();															//Musica de victoria usada de inicio
+=======
+  MX_TIM14_Init();
+  /* USER CODE BEGIN 2 */
+
+  INICIO_TECLADO();
+  INICIO_JUEGO();
+
+>>>>>>> origin/main
 
   /* USER CODE END 2 */
 
@@ -206,6 +235,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+<<<<<<< HEAD
 
 	  switch (ESTADO)																						//Switch que cambia de estado
 	  {
@@ -241,6 +271,32 @@ int main(void)
 
 	      case 5:
 	          TRANSICION_END_GAME();																		////Funcion de primer estado TRANSICION_END_GAME
+=======
+	  switch (ESTADO)
+	  {
+	      case 0:
+	          MENU();
+	          break;
+
+	      case 1:
+	          PLAYER();
+	          break;
+
+	      case 2:
+	          TRANSICION();
+	          break;
+
+	      case 3:
+	          CPU_JUEGA();
+	          break;
+
+	      case 4:
+	          END_GAME();
+	          break;
+
+	      case 5:
+	          TRANSICION_END_GAME();
+>>>>>>> origin/main
 	          break;
 	  }
 
@@ -295,6 +351,7 @@ void SystemClock_Config(void)
 }
 
 /**
+<<<<<<< HEAD
   * @brief TIM3 Initialization Function
   * @param None
   * @retval None
@@ -413,6 +470,8 @@ static void MX_TIM4_Init(void)
 }
 
 /**
+=======
+>>>>>>> origin/main
   * @brief TIM14 Initialization Function
   * @param None
   * @retval None
@@ -444,6 +503,7 @@ static void MX_TIM14_Init(void)
 }
 
 /**
+<<<<<<< HEAD
   * Enable DMA controller clock
   */
 static void MX_DMA_Init(void)
@@ -460,6 +520,8 @@ static void MX_DMA_Init(void)
 }
 
 /**
+=======
+>>>>>>> origin/main
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -487,7 +549,12 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(OTG_FS_PowerSwitchOn_GPIO_Port, OTG_FS_PowerSwitchOn_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
+<<<<<<< HEAD
   HAL_GPIO_WritePin(GPIOD, LD3_Pin|LD5_Pin|LD6_Pin|Audio_RST_Pin, GPIO_PIN_RESET);
+=======
+  HAL_GPIO_WritePin(GPIOD, LD4_Pin|LD3_Pin|LD5_Pin|LD6_Pin
+                          |Audio_RST_Pin, GPIO_PIN_RESET);
+>>>>>>> origin/main
 
   /*Configure GPIO pins : CS_I2C_SPI_Pin FILA_D_Pin FILA_C_Pin FILA_B_Pin
                            FILA_A_Pin */
@@ -527,8 +594,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Alternate = GPIO_AF6_SPI3;
   HAL_GPIO_Init(I2S3_WS_GPIO_Port, &GPIO_InitStruct);
 
+<<<<<<< HEAD
   /*Configure GPIO pins : SPI1_SCK_Pin SPI1_MOSI_Pin */
   GPIO_InitStruct.Pin = SPI1_SCK_Pin|SPI1_MOSI_Pin;
+=======
+  /*Configure GPIO pins : SPI1_SCK_Pin SPI1_MISO_Pin SPI1_MOSI_Pin */
+  GPIO_InitStruct.Pin = SPI1_SCK_Pin|SPI1_MISO_Pin|SPI1_MOSI_Pin;
+>>>>>>> origin/main
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -555,8 +627,15 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Alternate = GPIO_AF5_SPI2;
   HAL_GPIO_Init(CLK_IN_GPIO_Port, &GPIO_InitStruct);
 
+<<<<<<< HEAD
   /*Configure GPIO pins : LD3_Pin LD5_Pin LD6_Pin Audio_RST_Pin */
   GPIO_InitStruct.Pin = LD3_Pin|LD5_Pin|LD6_Pin|Audio_RST_Pin;
+=======
+  /*Configure GPIO pins : LD4_Pin LD3_Pin LD5_Pin LD6_Pin
+                           Audio_RST_Pin */
+  GPIO_InitStruct.Pin = LD4_Pin|LD3_Pin|LD5_Pin|LD6_Pin
+                          |Audio_RST_Pin;
+>>>>>>> origin/main
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -612,6 +691,10 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 
 // DEFINO ESTADO MENU Y SU INTERACCION CON TECLADO Y BUZZER
+<<<<<<< HEAD
+=======
+// Ver si agregar INTERFAZ de USUARIO
+>>>>>>> origin/main
 void MENU(void)
 {
 
@@ -622,6 +705,10 @@ void MENU(void)
 		  INICIO_ESTADO_TECLADO = 0;
 		}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 	TecladoPresiona();
 
 	switch (Teclado_Accionado)
@@ -631,13 +718,20 @@ void MENU(void)
 		// Elije si CPU activo o no
 		case 4:
 			{
+<<<<<<< HEAD
 				CPU = !CPU;
 				actualizarpantalla = 0;
+=======
+				//buzzer
+				CPU = !CPU;
+
+>>>>>>> origin/main
 			}break;
 
 		// Elije diff de CPU
 		case 5:
 			{
+<<<<<<< HEAD
 				CPU_DIFF = 1;
 				actualizarpantalla = 0;
 			}break;
@@ -658,6 +752,31 @@ void MENU(void)
 				HAL_TIM_Base_Stop_IT(&htim14);
 				ESTADO = 1;
 				actualizarpantalla = 0;
+=======
+				//buzzer
+				CPU_DIFF = 1;
+
+			}break;
+		case 6:
+			{
+				//buzzer
+				CPU_DIFF = 2;
+
+			}break;
+		case 7:
+			{
+				//buzzer
+				CPU_DIFF = 3;
+
+			}break;
+
+		// CAMBIA DE ESTADO A P1
+		case 8:
+			{
+				//buzzer
+				HAL_TIM_Base_Stop_IT(&htim14);
+				ESTADO = 1;
+>>>>>>> origin/main
 				INICIO_ESTADO_TECLADO = 1;
 
 			}break;
@@ -665,22 +784,36 @@ void MENU(void)
 		// Cambia color P1 y P2, ponele q son 3, subida
 		case 10:
 			{
+<<<<<<< HEAD
 				actualizarpantalla = 0;
+=======
+				//buzzer
+>>>>>>> origin/main
 				if (COLOR_P1 < 3) COLOR_P1++;
 				else COLOR_P1 = 1;
 
 			}break;
 		case 14:
 			{
+<<<<<<< HEAD
 				actualizarpantalla = 0;
 				if (COLOR_P2 < 3) COLOR_P2++;
 				else COLOR_P2 = 1;
+=======
+				//buzzer
+				if (COLOR_P2 < 3) COLOR_P2++;
+				else COLOR_P2 = 0;
+>>>>>>> origin/main
 
 			}break;
 		// Cambia color P1 y P2, bajada
 		case 9:
 			{
+<<<<<<< HEAD
 				actualizarpantalla = 0;
+=======
+				//buzzer
+>>>>>>> origin/main
 				if (COLOR_P1 > 1) COLOR_P1--;
 				else COLOR_P1 = 3;
 
@@ -688,7 +821,11 @@ void MENU(void)
 
 		case 13:
 			{
+<<<<<<< HEAD
 				actualizarpantalla = 0;
+=======
+				//buzzer
+>>>>>>> origin/main
 				if (COLOR_P2 > 1) COLOR_P2--;
 				else COLOR_P2 = 3;
 
@@ -703,11 +840,19 @@ void MENU(void)
 
 
 	}// END SWITCH
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 	Teclado_Accionado = 16;
 
 }
 
+<<<<<<< HEAD
 void PLAYER(void)											//Estado 1, selecciona entre columnas, confirma jugada, o reinicia
+=======
+void PLAYER(void)
+>>>>>>> origin/main
 {
 
 	// CUANDO ENTRA EN PLAYER ACTIVA INTERRUPT
@@ -716,35 +861,56 @@ void PLAYER(void)											//Estado 1, selecciona entre columnas, confirma juga
 		  HAL_TIM_Base_Start_IT(&htim14);
 		  INICIO_ESTADO_TECLADO = 0;
 		}
+<<<<<<< HEAD
 	TecladoPresiona();
 
+=======
+
+	TecladoPresiona();
+>>>>>>> origin/main
 
 	switch(Teclado_Accionado)
 	{
 		// Selecciona COLUMNA 1
 		case 0:
 		{
+<<<<<<< HEAD
 			COLUMNA = 0;
 			actualizarpantalla = 0;
+=======
+			//buzzer
+			COLUMNA = 0;
+>>>>>>> origin/main
 		}break;
 
 		// Selecciona COLUMNA 2
 		case 1:
 		{
+<<<<<<< HEAD
 			COLUMNA = 1;
 			actualizarpantalla = 0;
+=======
+			//buzzer
+			COLUMNA = 1;
+>>>>>>> origin/main
 		}break;
 
 		// Selecciona COLUMNA 3
 		case 2:
 		{
+<<<<<<< HEAD
 			COLUMNA = 2;
 			actualizarpantalla = 0;
+=======
+			//buzzer
+			COLUMNA = 2;
+>>>>>>> origin/main
 		}break;
 
 		// Selecciona COLUMNA 4
 		case 3:
 		{
+<<<<<<< HEAD
 			COLUMNA = 3;
 			actualizarpantalla = 0;
 		}break;
@@ -767,11 +933,37 @@ void PLAYER(void)											//Estado 1, selecciona entre columnas, confirma juga
 				L[i]=0x000000;
 			INICIO_ESTADO_TECLADO = 1;
 			actualizarpantalla = 0;
+=======
+			//buzzer
+			COLUMNA = 3;
+		}break;
+
+		// Confirmar Jugada
+		case 8:
+		{
+			//buzzer
+			HAL_TIM_Base_Stop_IT(&htim14);
+			ESTADO = 2;
+			INICIO_ESTADO_TECLADO = 1;
+		}break;
+
+		// RESET
+		case 12:
+		{
+			//buzzer
+			HAL_TIM_Base_Stop_IT(&htim14);
+			ESTADO = 5;
+			INICIO_ESTADO_TECLADO = 1;
+>>>>>>> origin/main
 		}break;
 
 		// Si es distinto a alguna accion de teclado valida en PLAYER entonces teclado = 16
 		default:
 		{
+<<<<<<< HEAD
+=======
+			//buzzer
+>>>>>>> origin/main
 			Teclado_Accionado = 16;
 		}break;
 
@@ -781,7 +973,11 @@ void PLAYER(void)											//Estado 1, selecciona entre columnas, confirma juga
 }
 
 
+<<<<<<< HEAD
 uint8_t COLOR_PLAYER(bool TURNO_JUGADOR)							//Asigna color
+=======
+uint8_t COLOR_PLAYER(bool TURNO_JUGADOR)
+>>>>>>> origin/main
 {
 	if (TURNO_JUGADOR)
 	{
@@ -796,13 +992,19 @@ uint8_t COLOR_PLAYER(bool TURNO_JUGADOR)							//Asigna color
 
 
 // ACA VA LA LOGICA DEL JUEGO, DECIDE SI JUGADOR HACE JUGADA VALIDA, SI HACE ANIMACION DE TRANSICION, SI PASA A P2
+<<<<<<< HEAD
 // SI PASA A CPU O SI VUELVE A P1, O SI FINALIZA EL JUEGo
 
+=======
+// SI PASA A CPU O SI VUELVE A P1, O SI FINALIZA EL JUEGO, TODOO JUNTO
+// aca por ahi si, se introduce una variable matriz de la posicion de las jugadas
+>>>>>>> origin/main
 void TRANSICION(void)
 {
 
 	COLOR = COLOR_PLAYER(TURNO_JUGADOR);
 
+<<<<<<< HEAD
 	if ( M[0][COLUMNA] != 0 )											//Jugada invalida
 	{
 		buzzinvalida();
@@ -810,12 +1012,33 @@ void TRANSICION(void)
 		return;
 	}
 		buzzvalida();													//Jugada valida
+=======
+	if ( M[0][COLUMNA] != 0 )
+	{
+		//JUGADA INVALIDA
+
+		//buzzer
+		ESTADO = 1;
+		return;
+	}
+
+		//JUGADA VALIDADA
+
+		//buzzer
+>>>>>>> origin/main
 		JUGADA_ACEPTADA();
 
 }
 
+<<<<<<< HEAD
 void INICIO_JUEGO(void)													//Setea las varialbes en 0 para inicio de juego o reincio
 {
+=======
+void INICIO_JUEGO(void)
+{
+	// aca hago algo con los LED para que pase un tiempito
+	// es inicio de juego
+>>>>>>> origin/main
 	memset(M, 0, sizeof(M));
     ESTADO=0;
     GANA=0;
@@ -831,6 +1054,7 @@ void INICIO_JUEGO(void)													//Setea las varialbes en 0 para inicio de ju
 
 }
 
+<<<<<<< HEAD
 void JUGADA_ACEPTADA(void)												//Como la jugada fue validadada la guarda en matriz
 {
     uint8_t c = COLUMNA;			//Columna pulsada
@@ -923,11 +1147,129 @@ uint8_t WIN_CONDITION(void)														//Revisa matriz para revisar victoria o
 
     GANA = 5;
     return GANA;
+=======
+void JUGADA_ACEPTADA(void)
+{
+	uint8_t c = COLUMNA;
+
+	M[0][c] = COLOR;
+	// ENCIENDO PRIMER LED
+	//SI COLUMNA 3 ENTONCES ENCIENDO D20
+
+	for (uint8_t f = 1; f < 8; f++)
+	{
+		if (M[f][c] != 0)
+		{
+			ESTADO = 4;
+			return;
+		}
+
+//	ESTA FUNCION DEBE ENCENDER LA FILA ACTUAL Y APAGAR LA ANTERIOR
+//		ASIGNACION_LEDS(c,f,COLOR)
+
+		M[f][c] = COLOR;
+
+
+		M[f - 1][c] = 0;
+
+	}
+
+//		disp(M);
+
+	ESTADO = 4;
+}
+
+
+uint8_t WIN_CONDITION(void)
+{
+	// Zona central
+	for (uint8_t f = 1; f <= 6; f++)
+	{
+		for (uint8_t c = 1; c <= 2; c++)
+		{
+			if (M[f][c] != 0)
+			{
+				if (
+						((M[f-1][c]   == M[f][c]) && (M[f+1][c]   == M[f][c])) ||
+						((M[f-1][c-1] == M[f][c]) && (M[f+1][c+1] == M[f][c])) ||
+						((M[f][c-1]   == M[f][c]) && (M[f][c+1]   == M[f][c])) ||
+						((M[f+1][c-1] == M[f][c]) && (M[f-1][c+1] == M[f][c]))
+				)
+				{
+					return M[f][c];
+				}
+			}
+		}
+	}
+
+	// Fila superior
+	if (M[0][1] != 0)
+	{
+		if (
+				((M[0][0] == M[0][1]) && (M[0][1] == M[0][2])) ||
+				((M[0][1] == M[0][2]) && (M[0][2] == M[0][3]))
+		)
+		{
+			return M[0][1];
+		}
+	}
+
+	// Fila inferior
+	if (M[7][1] != 0)
+	{
+		if (
+				((M[7][0] == M[7][1]) && (M[7][1] == M[7][2])) ||
+				((M[7][1] == M[7][2]) && (M[7][2] == M[7][3]))
+		)
+		{
+			return M[7][1];
+		}
+	}
+
+	// Columna izquierda
+	for (uint8_t f = 1; f <= 6; f++)
+	{
+		if (M[f][0] != 0)
+		{
+			if ((M[f-1][0] == M[f][0]) &&
+					(M[f+1][0] == M[f][0]))
+			{
+				return M[f][0];
+			}
+		}
+	}
+
+	// Columna derecha
+	for (uint8_t f = 1; f <= 6; f++)
+	{
+		if (M[f][3] != 0)
+		{
+			if ((M[f-1][3] == M[f][3]) &&
+					(M[f+1][3] == M[f][3]))
+			{
+				return M[f][3];
+			}
+		}
+	}
+
+	// Empate (fila superior llena)
+	if ((M[0][0] != 0) &&
+			(M[0][1] != 0) &&
+			(M[0][2] != 0) &&
+			(M[0][3] != 0))
+	{
+		return 5;
+	}
+
+	// No hay ganador
+	return 0;
+>>>>>>> origin/main
 }
 
 void END_GAME(void)
 {
 
+<<<<<<< HEAD
 	GANA = WIN_CONDITION();													//Si hay victoria o empate campia de estado y se escucha el tono correspondiente
 	 if  (GANA ==5){
 	    	buzzempate();
@@ -945,6 +1287,21 @@ void END_GAME(void)
 	buzzturno();
 	TURNO_JUGADOR = !TURNO_JUGADOR;											//Cambio de turno
 
+=======
+	GANA = WIN_CONDITION();
+
+	if (GANA =! 0)
+	{
+		ESTADO = 5;
+		return;
+	}
+
+
+	//SI NO ES FIN DE JUEGO
+
+	// CAMBIA TURNO ENTRE P1 y (P2 o CPU)
+	TURNO_JUGADOR = !TURNO_JUGADOR;
+>>>>>>> origin/main
 
 	//Si CPU = 0 entonces vuelve a PLAYER siempre
 	if (CPU == 0)
@@ -966,9 +1323,14 @@ void END_GAME(void)
 }
 
 
+<<<<<<< HEAD
 void TRANSICION_END_GAME(void)																	//Estado final
 {
 	bool FINFIN=1;																				//Para que la animacion se ejecute una unica vez
+=======
+void TRANSICION_END_GAME(void)
+{
+>>>>>>> origin/main
 	Teclado_Accionado = 16;
 
 	if (INICIO_ESTADO_TECLADO == 1)
@@ -977,6 +1339,7 @@ void TRANSICION_END_GAME(void)																	//Estado final
 		  INICIO_ESTADO_TECLADO = 0;
 		}
 
+<<<<<<< HEAD
 	while (Teclado_Accionado == 16 && actualizarpantalla == 0)
 	{
 		TecladoPresiona();
@@ -1011,10 +1374,37 @@ void CPU_JUEGA(void)														 //Funcion de CPU
 	actualizarpantalla = 0;
 
 	if ((CPU_DIFF == 1)|| (CPU_DIFF == 3))									//Si el DIFF_CPU esta en 1 o 3 es nivel de dificultad facil
+=======
+	while (Teclado_Accionado == 16)
+	{
+		TecladoPresiona();
+
+		for (uint8_t f = 7; f >= 0; f--)
+		        {
+		            for (uint8_t c = 0; c < 4; c++)
+		            {
+		                M[f][c] = GANA;
+		            }
+		        }
+
+	}
+	HAL_TIM_Base_Stop_IT(&htim14);
+	ESTADO = 0;
+	INICIO_JUEGO();
+	INICIO_ESTADO_TECLADO = 1;
+
+}
+
+void CPU_JUEGA(void)
+{
+
+	if (CPU_DIFF == 1)
+>>>>>>> origin/main
 	{
 		uint8_t disponibles[4];
 		uint8_t n = 0;
 
+<<<<<<< HEAD
 		for (uint8_t c = 0; c < 4; c++)									   //Algoritmo para jugada random
 		{
 			if (M[0][c] == 0)
@@ -1080,6 +1470,8 @@ void CPU_JUEGA(void)														 //Funcion de CPU
 		uint8_t disponibles[4];
 		uint8_t n = 0;
 
+=======
+>>>>>>> origin/main
 		for (uint8_t c = 0; c < 4; c++)
 		{
 			if (M[0][c] == 0)
@@ -1087,11 +1479,71 @@ void CPU_JUEGA(void)														 //Funcion de CPU
 				disponibles[n++] = c;
 			}
 		}
+<<<<<<< HEAD
 
 		COLUMNA = disponibles[rand() % n];
 	}
 }
 
+=======
+		COLUMNA = disponibles[rand() % n];
+	}
+	else if (CPU_DIFF == 2)
+	{
+
+	}
+
+	ESTADO = 2;
+
+}
+
+void ASIGNACION_LEDS(uint8_t columna, uint8_t fila, uint8_t COLOR)
+{
+	uint32_t HEX_COLOR = 0x000000;
+
+	//ROJO
+	if (COLOR == 1) HEX_COLOR = 0x1F0000;
+	//AZUL
+	if (COLOR == 2) HEX_COLOR = 0x00001F;
+
+	if (columna == 0)
+	{
+//	encender fila actual
+//	esto es enciendo D_X del vector asociado a VECTOR COLOR 0
+
+//		VECTOR_COLOR_0[fila] = HEX_COLOR;
+//	y apago D_X anterior
+//		VECTOR_COLOR_0[fila - 1] = 0x000000;
+	}
+	else if (columna == 1)
+	{
+//	encender fila actual
+//	esto es enciendo D_X del vector asociado a VECTOR COLOR 1
+
+//		VECTOR_COLOR_1[fila] = HEX_COLOR;
+//	y apago D_X anterior
+//		VECTOR_COLOR_1[fila - 1] = 0x000000;
+	}
+	else if (columna == 2)
+	{
+//	encender fila actual
+//	esto es enciendo D_X del vector asociado a VECTOR COLOR 2
+
+//		VECTOR_COLOR_2[fila] = HEX_COLOR;
+//	y apago D_X anterior
+//		VECTOR_COLOR_2[fila - 1] = 0x000000;
+	}
+	else if (columna == 3)
+	{
+//	encender fila actual
+//	esto es enciendo D_X del vector asociado a VECTOR COLOR 3
+
+//		VECTOR_COLOR_3[fila] = HEX_COLOR;
+//	y apago D_X anterior
+//		VECTOR_COLOR_3[fila - 1] = 0x000000;
+	}
+}
+>>>>>>> origin/main
 
 
 /* USER CODE END 4 */

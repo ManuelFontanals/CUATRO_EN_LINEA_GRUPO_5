@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 "./Core/Src/Buzzer.o"
 "./Core/Src/LEDS.o"
+=======
+>>>>>>> origin/main
 "./Core/Src/TECLADO.o"
 "./Core/Src/main.o"
 "./Core/Src/stm32f4xx_hal_msp.o"

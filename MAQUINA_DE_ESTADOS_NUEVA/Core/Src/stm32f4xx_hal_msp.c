@@ -23,7 +23,10 @@
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
+<<<<<<< HEAD
 extern DMA_HandleTypeDef hdma_tim4_ch1;
+=======
+>>>>>>> origin/main
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
@@ -58,9 +61,13 @@ extern DMA_HandleTypeDef hdma_tim4_ch1;
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
+<<<<<<< HEAD
 
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
                                         /**
+=======
+/**
+>>>>>>> origin/main
   * Initializes the Global MSP.
   */
 void HAL_MspInit(void)
@@ -90,6 +97,7 @@ void HAL_MspInit(void)
   */
 void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
 {
+<<<<<<< HEAD
   if(htim_base->Instance==TIM3)
   {
     /* USER CODE BEGIN TIM3_MspInit 0 */
@@ -133,6 +141,9 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
     /* USER CODE END TIM4_MspInit 1 */
   }
   else if(htim_base->Instance==TIM14)
+=======
+  if(htim_base->Instance==TIM14)
+>>>>>>> origin/main
   {
     /* USER CODE BEGIN TIM14_MspInit 0 */
 
@@ -145,10 +156,15 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
     /* USER CODE BEGIN TIM14_MspInit 1 */
 
     /* USER CODE END TIM14_MspInit 1 */
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
   }
 
 }
 
+<<<<<<< HEAD
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -195,6 +211,8 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
   }
 
 }
+=======
+>>>>>>> origin/main
 /**
   * @brief TIM_Base MSP De-Initialization
   * This function freeze the hardware resources used in this example
@@ -203,6 +221,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
   */
 void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
 {
+<<<<<<< HEAD
   if(htim_base->Instance==TIM3)
   {
     /* USER CODE BEGIN TIM3_MspDeInit 0 */
@@ -229,6 +248,9 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
     /* USER CODE END TIM4_MspDeInit 1 */
   }
   else if(htim_base->Instance==TIM14)
+=======
+  if(htim_base->Instance==TIM14)
+>>>>>>> origin/main
   {
     /* USER CODE BEGIN TIM14_MspDeInit 0 */
 
