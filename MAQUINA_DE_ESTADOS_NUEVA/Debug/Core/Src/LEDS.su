@@ -1,0 +1,4 @@
+../Core/Src/LEDS.c:9:6:armadoled	80	static
+../Core/Src/LEDS.c:87:6:comunicacionled	32	static
+../Core/Src/LEDS.c:109:6:HAL_TIM_PWM_PulseFinishedCallback	16	static
+../Core/Src/LEDS.c:117:6:ENVIODMA	16	static
