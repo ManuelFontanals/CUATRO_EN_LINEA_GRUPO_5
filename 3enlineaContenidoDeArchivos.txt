@@ -1,0 +1,40 @@
+main.C
+
+ESTADOS
+  -MENU
+  -PLAYER
+  -TRANSICION
+  -CPU_JUEGA
+  -ENDGAME
+  -TRANSICION_ENDGAME
+
+FUNCIONES
+  -COLOR_PLAYER
+  -INCIO_JUEGO
+  -JUGADA_ACEPTADA 
+  -WIN_CONDITION
+
+
+LEDS.C
+
+FUNCIONES
+  -armadoled
+  -comunicacionled
+  -ENVIODMA
+
+Buzzer.c
+
+FUNCIONES
+  -buzzvalida
+  -buzzinvalida
+  -buzzturno
+  -buzzempate
+  -buzzvictoria
+
+TECLADO.c
+
+FUNCIONES
+ -INICIO_TECLADO
+ -VerificarBoton
+ -TecladoPresiona
+ -Atención a interrupción por TIM14

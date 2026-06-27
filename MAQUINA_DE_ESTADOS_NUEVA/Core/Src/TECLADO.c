@@ -47,7 +47,7 @@ void INICIO_TECLADO(void)
 	HAL_GPIO_WritePin(FILA_D_GPIO_Port, FILA_D_Pin, GPIO_PIN_SET);
 }
 
-// ANTIRREBOTE
+// ANTIRREBOTE por flanco, si mantengo apretado el boton no le hace caso
 bool VerificarBoton(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, Debounce_t *btn)
 {
 	// Lectura "anterior"
@@ -114,7 +114,6 @@ void TecladoPresiona(void) {
 		{
 			// Accion sobre MT(0,0) o 0
 			HAL_GPIO_WritePin(FILA_A_GPIO_Port, FILA_A_Pin, GPIO_PIN_RESET);
-//			HAL_Delay(1);
 			if (HAL_GPIO_ReadPin(COLUMNA_A_GPIO_Port, COLUMNA_A_Pin) == GPIO_PIN_RESET){
 				Teclado_Accionado = 0;
 				break;
@@ -124,7 +123,6 @@ void TecladoPresiona(void) {
 
 			// Accion sobre MT(1,0) o 4
 			HAL_GPIO_WritePin(FILA_B_GPIO_Port, FILA_B_Pin, GPIO_PIN_RESET);
-//			HAL_Delay(1);
 			if (HAL_GPIO_ReadPin(COLUMNA_A_GPIO_Port, COLUMNA_A_Pin) == GPIO_PIN_RESET){
 				Teclado_Accionado = 4;
 				break;
@@ -134,7 +132,6 @@ void TecladoPresiona(void) {
 
 			// Accion sobre MT(2,0) o 8
 			HAL_GPIO_WritePin(FILA_C_GPIO_Port, FILA_C_Pin, GPIO_PIN_RESET);
-//			HAL_Delay(1);
 			if (HAL_GPIO_ReadPin(COLUMNA_A_GPIO_Port, COLUMNA_A_Pin) == GPIO_PIN_RESET){
 				Teclado_Accionado = 8;
 				break;
@@ -143,7 +140,6 @@ void TecladoPresiona(void) {
 
 			// Accion sobre MT(3,0) o 12
 			HAL_GPIO_WritePin(FILA_D_GPIO_Port, FILA_D_Pin, GPIO_PIN_RESET);
-//			HAL_Delay(1);
 			if (HAL_GPIO_ReadPin(COLUMNA_A_GPIO_Port, COLUMNA_A_Pin) == GPIO_PIN_RESET){
 				Teclado_Accionado = 12;
 				break;
@@ -198,7 +194,6 @@ void TecladoPresiona(void) {
 		{
 			// Accion sobre MT(0,2) o 2
 			HAL_GPIO_WritePin(FILA_A_GPIO_Port, FILA_A_Pin, GPIO_PIN_RESET);
-//			HAL_Delay(1);
 			if (HAL_GPIO_ReadPin(COLUMNA_C_GPIO_Port, COLUMNA_C_Pin) == GPIO_PIN_RESET){
 				Teclado_Accionado = 2;
 				break;
@@ -277,6 +272,7 @@ void TecladoPresiona(void) {
 
 	} // END SWITCH
 
+	//Reseteo variables para la proxima lectura
 	LLAMA_COL = 0;
 	INICIO_TECLADO();
 	HAL_TIM_Base_Start_IT(&htim14);

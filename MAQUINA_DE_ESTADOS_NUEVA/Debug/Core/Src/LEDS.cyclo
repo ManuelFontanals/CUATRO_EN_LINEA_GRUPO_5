@@ -1,0 +1,4 @@
+../Core/Src/LEDS.c:9:6:armadoled	26
+../Core/Src/LEDS.c:87:6:comunicacionled	5
+../Core/Src/LEDS.c:109:6:HAL_TIM_PWM_PulseFinishedCallback	2
+../Core/Src/LEDS.c:117:6:ENVIODMA	3
